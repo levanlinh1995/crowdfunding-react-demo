@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "test": "mocha",
+    "dev": "node server.js",
+    "build": "next build"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "next": "^4.2.3",
+    "next-routes": "^1.4.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "semantic-ui-css": "^2.2.12",
+    "semantic-ui-react": "^0.77.2",
+    "web3": "^1.8.0"
+  }
+}
