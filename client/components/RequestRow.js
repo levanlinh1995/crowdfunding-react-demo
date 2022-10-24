@@ -7,18 +7,20 @@ class RequestRow extends Component {
   onApprove = async () => {
     const campaign = Campaign(this.props.address);
 
-    const accounts = await web3.eth.getAccounts();
+    // const accounts = await web3.eth.getAccounts();
+    const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
     await campaign.methods.approveRequest(this.props.id).send({
-      from: accounts[0]
+      from: account
     });
   };
 
   onFinalize = async () => {
     const campaign = Campaign(this.props.address);
 
-    const accounts = await web3.eth.getAccounts();
+    // const accounts = await web3.eth.getAccounts();
+    const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
     await campaign.methods.finalizeRequest(this.props.id).send({
-      from: accounts[0]
+      from: account
     });
   };
 
