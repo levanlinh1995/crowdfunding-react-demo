@@ -6,25 +6,24 @@ const { GOERLI_KEY, MNEMONIC } = require('../interaction.json');
 
 let web3;
 
-const ethEnabled = async () => {
-if (window.ethereum) {
-    await window.ethereum.request({method: 'eth_requestAccounts'});
-    window.web3 = new Web3(window.ethereum);
-    return true;
-}
-    return false;
-}
-    
-
 if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-    console.log('connected Metamask')
-    web3 = new Web3(window.ethereum);
+    console.log(' Metamask is installed')
+    window.web3 = new Web3(window.ethereum);
+    web3 = window.web3;
 
-    ethEnabled();
-} else {
+    try {
+        // Request account access if needed
+        windown.ethereum.enable();
+      } catch (error) {
+        // User denied account access...
+      }
+} else if (typeof window !== 'undefined' && typeof window.web3 !== 'undefined') { // Legacy dapp browsers...
+    window.web3 = new Web3(window.web3.currentProvider);
+    web3 = window.web3;
+} else { // Non-dapp browsers
     const provider = new Web3.providers.HttpProvider(
-        // `https://goerli.infura.io/v3/${GOERLI_KEY}`,
-        'http://127.0.0.1:7545'
+        `https://goerli.infura.io/v3/${GOERLI_KEY}`,
+        // 'http://127.0.0.1:7545'
     );
 
     console.log('connected Infura')
@@ -32,24 +31,6 @@ if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
     web3 = new Web3(provider);
 }
 
-// const provider = new Web3.providers.HttpProvider(
-//     `https://goerli.infura.io/v3/${GOERLI_KEY}`,
-//     // 'http://127.0.0.1:8545'
-// );
-
 // const provider = new HDWalletProvider(MNEMONIC, `https://goerli.infura.io/v3/${GOERLI_KEY}`);
-
-// web3 = new Web3(provider);
-
-// const test = async () => {
-//     const accounts = web3.eth.getAccounts();
-//     console.log('dslfjsdl')
-
-//       console.log(accounts);
-// }
-
-// test();
-
-
 
 export default web3;
