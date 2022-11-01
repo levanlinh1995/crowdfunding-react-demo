@@ -1,0 +1,74 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+
+  :global {
+    .ant-btn {
+      position: absolute;
+      top: 20px;
+      background-color: var(--cl-blue-6);
+      color: white;
+
+      border: 0;
+      border-radius: 5px;
+      height: 35px;
+
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-bold);
+
+      span {
+        margin-right: 5px;
+      }
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+.listCampaign {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 100px;
+
+  :global {
+    .ant-card {
+      border-radius: 10px;
+      margin: auto;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+      }
+    }
+    .ant-card-meta-detail {
+      padding: 10px;
+    }
+    .ant-card-meta-title {
+      background-color: var(--cl-blue-5);
+      max-width: 100px;
+      border-radius: 8px;
+
+      display: flex;
+      justify-content: center;
+      color: white;
+
+      font-size: var(--font-size-xxs);
+      font-weight: var(--font-bold);
+      line-height: 1.5;
+    }
+    .ant-card-meta-description {
+      padding-top: 20px;
+      font-weight: var(--font-bold);
+      overflow-wrap: break-word;
+    }
+  }
+}
