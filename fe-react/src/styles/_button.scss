@@ -1,0 +1,57 @@
+.ant-btn-default {
+  span {
+    color: white;
+  }
+
+  border-color: var(--cl-grey-75);
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+    // background-color: var(--cl-grey-35);
+    border-color: var(--cl-grey-75);
+
+    span {
+      color: white;
+    }
+  }
+}
+
+.ant-btn-primary {
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
+.ant-btn-dangerous.ant-btn-primary {
+  &:hover {
+    cursor: pointer;
+    color: white;
+    // background-color: var(--cl-red-8);
+    border-color: var(--cl-red-8);
+  }
+}
+
+.ant-btn-primary[disabled],
+.ant-btn-primary[disabled]:hover,
+.ant-btn-primary[disabled]:focus,
+.ant-btn-primary[disabled]:active {
+  // background-color: var(--cl-grey-85);
+  border-color: var(--cl-grey-75);
+  color: white;
+}
+
+.ant-btn-text {
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+.ant-btn-link:focus {
+  color: var(--cl-blue-6);
+}
+
+.ant-btn-link[disabled] {
+  color: var(--cl-grey-75);
+}

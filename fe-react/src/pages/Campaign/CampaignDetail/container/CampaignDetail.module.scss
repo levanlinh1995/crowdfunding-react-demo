@@ -1,0 +1,56 @@
+.wrapper {
+  text-align: center;
+}
+
+.detail {
+  display: flex;
+  justify-content: center;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 0 20px;
+
+  a {
+    color: var(--cl-blue-6) !important;
+    margin-left: 5px;
+    font-size: var(--font-size-xs);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.infoCampaign {
+  display: flex;
+  flex-direction: column;
+
+  max-width: 500px;
+
+  :global {
+    .ant-btn {
+      background-color: var(--cl-blue-6);
+      color: white;
+
+      border: 0;
+      border-radius: 5px;
+      height: 40px;
+
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-bold);
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+.title {
+  font-weight: var(--font-bold);
+  overflow-wrap: break-word;
+}
