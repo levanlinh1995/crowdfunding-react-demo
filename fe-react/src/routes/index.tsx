@@ -62,6 +62,11 @@ const privateRoutes: RouteType[] = [
         element: lazyLoadRoute('Campaign/CreateCampaign')
       },
       {
+        path: ':address/requests/new',
+        title: titlePage('Campaign request'),
+        element: lazyLoadRoute('Campaign/AddRequest')
+      },
+      {
         path: ':address/requests',
         title: titlePage('Campaign request'),
         element: lazyLoadRoute('Campaign/CampaignRequest')
