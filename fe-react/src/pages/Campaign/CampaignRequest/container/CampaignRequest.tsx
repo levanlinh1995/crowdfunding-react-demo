@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Campaign from '@/utils/campaign'
 import { Table, Button } from 'antd'
 import { ColumnsType } from 'antd/lib/table/Table'
@@ -35,6 +35,7 @@ export interface IDataTable {
 }
 
 const CampaignRequest = () => {
+  const navigate = useNavigate()
   const { address } = useParams()
   const [campaign, setCampaign] = useState<ICampaign>()
 
@@ -139,7 +140,7 @@ const CampaignRequest = () => {
       </div>
       <div className={styles.title}>
         <h2>REQUEST</h2>
-        <Button>Add Request</Button>
+        <Button onClick={() => navigate(`${CAMPAIGN}/${address}/requests/new`)}>Add Request</Button>
       </div>
 
       <div className={styles.tableContainer}>
