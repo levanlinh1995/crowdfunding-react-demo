@@ -15,7 +15,7 @@ module.exports = {
    * $ truffle test --network <network-name>
    */
 
-  contracts_build_directory: "../client/ethereum/build/contracts",
+  contracts_build_directory: "../fe-react/src/ethereum/build/contracts",
   networks: {
     development: {
      host: "127.0.0.1",     // Localhost (default: none)

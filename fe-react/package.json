@@ -2,6 +2,12 @@
   "name": "react-typescript-template",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.14.1",
@@ -43,12 +49,6 @@
     "prettier": "^2.7.1",
     "react-app-rewired": "^2.2.1",
     "sass": "^1.54.3"
-  },
-  "scripts": {
-    "dev": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [
