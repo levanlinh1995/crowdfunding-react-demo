@@ -1,17 +1,26 @@
 import { Button, Form, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import styles from './CreateCampaign.module.scss'
+import factory from '@/utils/factory'
 
 interface IFormSubmit {
-  contribution: string
+  minimumContribution: string
 }
 
 const CreateCampaign = () => {
   const navigate = useNavigate()
   const [form] = Form.useForm<IFormSubmit>()
 
-  const onFinish = (values: IFormSubmit) => {
-    console.log('values', values)
+  const onFinish = async (formData: IFormSubmit) => {
+    // const accounts = await web3.eth.getAccounts();
+    const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
+    const campaignId =  1000;
+
+    await factory.methods
+      .createCampaign(campaignId, formData.minimumContribution)
+      .send({
+        from: account
+      });
   }
 
   return (
@@ -25,7 +34,7 @@ const CreateCampaign = () => {
         form={form}
         onFinish={onFinish}
       >
-        <Form.Item label='Minimum Contribution' name='contribution'>
+        <Form.Item label='Minimum Contribution' name='minimumContribution'>
           <Input placeholder='' />
         </Form.Item>
         <Form.Item className={styles.formButtons}>

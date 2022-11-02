@@ -2,6 +2,8 @@ import { CAMPAIGN } from '@/common/constants/routes'
 import { Button, Form, Input } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
 import styles from './AddRequest.module.scss'
+import Campaign from '@/utils/campaign'
+import web3 from '@/utils/web3'
 
 interface IFormSubmit {
   description: string
@@ -15,8 +17,15 @@ const AddRequest = () => {
 
   const [form] = Form.useForm<IFormSubmit>()
 
-  const onFinish = (values: IFormSubmit) => {
-    console.log('values', values)
+  const onFinish = async (formData : IFormSubmit) => {
+    // const accounts = await web3.eth.getAccounts();
+    // console.log(accounts)
+    const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
+    const campaign = Campaign(address);
+
+    await campaign.methods
+      .createRequest(formData.description, web3.utils.toWei(formData.value, 'ether'), formData.recipient)
+      .send({ from: account });
   }
   return (
     <div className={styles.root}>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Campaign from '@/utils/campaign'
+import web3 from '@/utils/web3'
 import { Table, Button } from 'antd'
 import { ColumnsType } from 'antd/lib/table/Table'
 import styles from './CampaignRequest.module.scss'
@@ -72,11 +73,23 @@ const CampaignRequest = () => {
     fetchApi()
   }, [])
 
-  const hdApprove = (id: string) => {
-    console.log('id', id)
+  const hdApprove = async (id: string) => {
+    const campaign = Campaign(address);
+
+    // const accounts = await web3.eth.getAccounts();
+    const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
+    await campaign.methods.approveRequest(id).send({
+      from: account
+    });
   }
-  const hdFinalize = (id: string) => {
-    console.log('id', id)
+  const hdFinalize = async (id: string) => {
+    const campaign = Campaign(address);
+
+    // const accounts = await web3.eth.getAccounts();
+    const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
+    await campaign.methods.finalizeRequest(id).send({
+      from: account
+    });
   }
 
   const { dataTable } = useDataRequest(campaign)

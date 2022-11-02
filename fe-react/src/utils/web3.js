@@ -7,7 +7,6 @@ import Web3 from 'web3'
 
 import Interaction from '../interaction.json'
 
-
 let web3
 
 if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
