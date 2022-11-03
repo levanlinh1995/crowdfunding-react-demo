@@ -1,4 +1,5 @@
 export interface ICampaign {
+  id?: number
   title: string
   description: string
   shortDescription: string
