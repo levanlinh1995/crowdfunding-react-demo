@@ -2,11 +2,6 @@ import Web3 from 'web3'
 
 // const HDWalletProvider = require("@truffle/hdwallet-provider");
 
-// const { GOERLI_KEY, MNEMONIC } = require('../interaction.json');
-// import { GOERLI_KEY } from '../../interaction.json'
-
-import Interaction from '../interaction.json'
-
 let web3
 
 if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
@@ -16,7 +11,7 @@ if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
 
   try {
     // Request account access if needed
-    window.ethereum.enable()
+    window.ethereum.request({ method: 'eth_requestAccounts' });
   } catch (error) {
     // User denied account access...
   }
@@ -26,14 +21,17 @@ if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
   web3 = window.web3
 } else {
   // Non-dapp browsers
-  const provider = new Web3.providers.HttpProvider(
-    `https://goerli.infura.io/v3/${Interaction.GOERLI_KEY}`
-    // 'http://127.0.0.1:7545'
-  )
 
-  console.log('connected Infura')
+  alert('please install Metamask');
 
-  web3 = new Web3(provider)
+  // const provider = new Web3.providers.HttpProvider(
+  //   `https://goerli.infura.io/v3/${Interaction.GOERLI_KEY}`
+  //   // 'http://127.0.0.1:7545'
+  // )
+
+  // console.log('connected Infura')
+
+  // web3 = new Web3(provider)
 }
 
 // const provider = new HDWalletProvider(MNEMONIC, `https://goerli.infura.io/v3/${GOERLI_KEY}`);

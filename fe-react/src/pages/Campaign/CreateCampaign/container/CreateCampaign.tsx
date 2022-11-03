@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './CreateCampaign.module.scss'
 import factory from '@/utils/factory'
 import campaignApi from '@/api/campaignApi'
+import web3 from '@/utils/web3'
 
 interface IFormSubmit {
   minimumContribution: string
@@ -21,16 +22,16 @@ const CreateCampaign = () => {
     const {minimumContribution, ...campaignData} = formData;
 
     const response = await campaignApi.add(campaignData);
+    const {id} = response.data
 
-    // // const accounts = await web3.eth.getAccounts();
-    // const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
-    // const campaignId =  1000;
+    const account = web3.currentProvider.selectedAddress
 
-    // await factory.methods
-    //   .createCampaign(campaignId, formData.minimumContribution)
-    //   .send({
-    //     from: account
-    //   });
+    await factory.methods
+      .createCampaign(id, minimumContribution)
+      .send({
+        from: account
+      });
+
     navigate('/')
   }
 

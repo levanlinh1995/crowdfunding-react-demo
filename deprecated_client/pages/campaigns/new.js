@@ -19,7 +19,7 @@ class CampaignNew extends Component {
 
     try {
       // const accounts = await web3.eth.getAccounts();
-      const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
+      const account = web3.currentProvider.selectedAddress
 
       await factory.methods
         .createCampaign(this.state.minimumContribution)

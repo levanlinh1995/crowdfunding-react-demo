@@ -131,6 +131,18 @@ const RoutesApp = () => {
       ? adminPrivateRoutes
       : privateRoutes
     setRoutes(routeList)
+
+    // if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
+    //   // detect Metamask account change
+    //   window.ethereum.on('accountsChanged', function (accounts) {
+    //     console.log('accountsChanges',accounts);
+    //   });
+
+    //   // detect Network account change
+    //   window.ethereum.on('networkChanged', function(networkId){
+    //     console.log('networkChanged',networkId);
+    //   });
+    // }
   }, [isPrivate, isAdmin])
 
   const renderRoutes = (routes: RouteType[]) =>

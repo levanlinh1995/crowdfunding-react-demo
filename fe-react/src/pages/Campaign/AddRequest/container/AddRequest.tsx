@@ -19,8 +19,7 @@ const AddRequest = () => {
 
   const onFinish = async (formData : IFormSubmit) => {
     // const accounts = await web3.eth.getAccounts();
-    // console.log(accounts)
-    const account = '0x34c93F7B17B60D84eF6f2606296bb869d827E0B6';
+    const account = web3.currentProvider.selectedAddress
     const campaign = Campaign(address);
 
     await campaign.methods
