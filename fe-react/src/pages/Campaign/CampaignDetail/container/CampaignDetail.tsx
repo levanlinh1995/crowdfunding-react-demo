@@ -1,7 +1,6 @@
-import { Button, Card } from 'antd'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import useDetailData from '../hooks/useDetailData'
 import styles from './CampaignDetail.module.scss'
+import { Card, Button, Form, Input } from 'antd'
 
 import { ArrowLeftOutlined } from '@ant-design/icons'
 import { CAMPAIGN } from '@/common/constants/routes'
@@ -11,8 +10,14 @@ import campaignApi from '@/api/campaignApi'
 import { ISmartContract } from '@/common/ts/interfaces'
 
 
+import web3 from '@/utils/web3'
+
+interface IFormSubmit {
+  value: string
+}
 
 const CampaignDetail = () => {
+  const [form] = Form.useForm<IFormSubmit>()
   const navigate = useNavigate()
   const { address } = useParams()
   const [ detailData, setDetailData ] = useState<ISmartContract>()
@@ -53,6 +58,19 @@ const CampaignDetail = () => {
       // err
     }
   }, [])
+
+  const onContribute = async (formData : IFormSubmit) => {
+    // const accounts = await web3.eth.getAccounts();
+    const account = web3.currentProvider.selectedAddress
+    const campaign = Campaign(address);
+
+    await campaign.methods.contribute().send({
+      from: account,
+      value: formData.value
+    });
+
+    window.location.reload();
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -96,9 +114,28 @@ const CampaignDetail = () => {
                 </li>
               </ul>
             </div>)}
-            
+
           </div>
           <Button onClick={hdViewRequest}>View request</Button>
+          <Form
+            form={form}
+            layout="inline"
+            onFinish={onContribute}
+          >
+            <Form.Item label='Value (Wei)' name='value'>
+              <Input placeholder='' />
+            </Form.Item>
+            <Form.Item className={styles.formButtons}>
+              <Button
+                className={styles.actionTBtn}
+                style={{ marginLeft: '20px' }}
+                type='primary'
+                htmlType='submit'
+              >
+                Contribute Now
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       </div>
     </div>

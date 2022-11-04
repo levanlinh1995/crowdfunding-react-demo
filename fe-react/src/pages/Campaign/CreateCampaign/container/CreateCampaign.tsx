@@ -6,7 +6,7 @@ import campaignApi from '@/api/campaignApi'
 import web3 from '@/utils/web3'
 
 interface IFormSubmit {
-  minimumContribution: string
+  minimumContribution: string,
   title: string
   shortDescription: string
   description: string
@@ -25,6 +25,7 @@ const CreateCampaign = () => {
     const {id} = response.data
 
     const account = web3.currentProvider.selectedAddress
+
 
     await factory.methods
       .createCampaign(id, minimumContribution)
@@ -46,7 +47,7 @@ const CreateCampaign = () => {
         form={form}
         onFinish={onFinish}
       >
-        <Form.Item label='Minimum Contribution' name='minimumContribution'>
+        <Form.Item label='Minimum Contribution (Wei)' name='minimumContribution'>
           <Input placeholder='' />
         </Form.Item>
         <Form.Item label='Title' name='title'>

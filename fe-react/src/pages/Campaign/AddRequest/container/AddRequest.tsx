@@ -23,7 +23,7 @@ const AddRequest = () => {
     const campaign = Campaign(address);
 
     await campaign.methods
-      .createRequest(formData.description, web3.utils.toWei(formData.value, 'ether'), formData.recipient)
+      .createRequest(formData.description, formData.value, formData.recipient)
       .send({ from: account });
   }
   return (
@@ -40,7 +40,7 @@ const AddRequest = () => {
         <Form.Item label='Description' name='description'>
           <Input placeholder='' />
         </Form.Item>
-        <Form.Item label='Value in Ether' name='value'>
+        <Form.Item label='Value (Wei)' name='value'>
           <Input placeholder='' />
         </Form.Item>
         <Form.Item label='Recipient' name='recipient'>

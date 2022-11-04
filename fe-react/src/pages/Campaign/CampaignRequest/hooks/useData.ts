@@ -3,13 +3,13 @@ import { ICampaign } from '../container/CampaignRequest'
 
 const useDataRequest = (data: ICampaign | undefined) => {
   const dataTable = useMemo(() => {
-    return data?.requests?.map((i) => {
+    return data?.requests?.map((i, index) => {
       return {
-        key: i[2],
-        id: i[4],
-        description: i[0],
-        recipient: i[2],
-        amount: 100,
+        key: index,
+        id: index,
+        description: i.description,
+        recipient: i.recipient,
+        amount: i.value,
         approvalCount: `${i.approvalCount}/${data.approversCount}`
       }
     })

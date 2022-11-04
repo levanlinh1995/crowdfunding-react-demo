@@ -23,12 +23,12 @@ export interface ICampaign {
     complete: boolean
     description: string
     recipient: string
-    value: string
+    value: number
   }[]
 }
 
 export interface IDataTable {
-  id: string
+  id: number
   description: string
   recipient: string
   amount: number
@@ -73,7 +73,7 @@ const CampaignRequest = () => {
     fetchApi()
   }, [])
 
-  const hdApprove = async (id: string) => {
+  const hdApprove = async (id: number) => {
     const campaign = Campaign(address);
 
     // const accounts = await web3.eth.getAccounts();
@@ -81,8 +81,10 @@ const CampaignRequest = () => {
     await campaign.methods.approveRequest(id).send({
       from: account
     });
+
+    window.location.reload();
   }
-  const hdFinalize = async (id: string) => {
+  const hdFinalize = async (id: number) => {
     const campaign = Campaign(address);
 
     // const accounts = await web3.eth.getAccounts();
@@ -90,6 +92,8 @@ const CampaignRequest = () => {
     await campaign.methods.finalizeRequest(id).send({
       from: account
     });
+
+    window.location.reload();
   }
 
   const { dataTable } = useDataRequest(campaign)
