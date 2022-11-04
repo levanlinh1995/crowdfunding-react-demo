@@ -25,6 +25,8 @@ const AddRequest = () => {
     await campaign.methods
       .createRequest(formData.description, formData.value, formData.recipient)
       .send({ from: account });
+
+    navigate(`${CAMPAIGN}/${address}/requests`)
   }
   return (
     <div className={styles.root}>

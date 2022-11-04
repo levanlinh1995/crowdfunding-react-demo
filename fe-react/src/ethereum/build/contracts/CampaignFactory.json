@@ -59,7 +59,7 @@
   "sourceMap": "62:376:0:-;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "62:376:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;134:191;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;93:34;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;331:105;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:2;8:100;;;99:1;94:3;90;84:5;80:1;75:3;71;64:6;52:2;49:1;45:3;40:15;;8:100;;;12:14;3:109;;;;;;;;;;;;;;;;;134:191:0;206:19;241:10;253:7;262:10;228:45;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;206:67;;283:17;:35;;;;;;;;;;;:::i;:::-;;;;;;;;;;306:11;283:35;;;;;;;;;;;;;;;;;;;;;;;134:191;;;:::o;93:34::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;331:105::-;384:9;;:::i;:::-;412:17;405:24;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;331:105;:::o;62:376::-;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;:::o;:::-;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
   "source": "// SPDX-License-Identifier: GPL-3.0\npragma solidity ^0.4.17;\n\ncontract CampaignFactory {\n    address[] public deployedCampaigns;\n\n    function createCampaign(uint campaignId, uint minimum) public {\n        address newCampaign = new Campaign(campaignId, minimum, msg.sender);\n        deployedCampaigns.push(newCampaign);\n    }\n\n    function getDeployedCampaigns() public view returns (address[]) {\n        return deployedCampaigns;\n    }\n}\n\ncontract Campaign {\n    struct Request {\n        string description;\n        uint value;\n        address recipient;\n        bool complete;\n        uint approvalCount;\n        mapping(address => bool) approvals;\n    }\n\n    uint campaignId;\n    Request[] public requests;\n    address public manager;\n    uint public minimumContribution;\n    mapping(address => bool) public approvers;\n    uint public approversCount;\n\n    modifier restricted() {\n        require(msg.sender == manager);\n        _;\n    }\n\n    function Campaign(uint _campaignId, uint _minimum, address _creator) public {\n        manager = _creator;\n        minimumContribution = _minimum;\n        campaignId = _campaignId;\n    }\n\n    function contribute() public payable {\n        require(msg.value > minimumContribution);\n\n        approvers[msg.sender] = true;\n        approversCount++;\n    }\n\n    function createRequest(string description, uint value, address recipient) public restricted {\n        Request memory newRequest = Request({\n           description: description,\n           value: value,\n           recipient: recipient,\n           complete: false,\n           approvalCount: 0\n        });\n\n        requests.push(newRequest);\n    }\n\n    function approveRequest(uint index) public {\n        Request storage request = requests[index];\n\n        require(approvers[msg.sender]);\n        require(!request.approvals[msg.sender]);\n\n        request.approvals[msg.sender] = true;\n        request.approvalCount++;\n    }\n\n    function finalizeRequest(uint index) public restricted {\n        Request storage request = requests[index];\n\n        require(request.approvalCount > (approversCount / 2));\n        require(!request.complete);\n\n        request.recipient.transfer(request.value);\n        request.complete = true;\n    }\n\n    function getSummary() public view returns (\n      uint, uint, uint, uint, uint, address\n      ) {\n        return (\n          campaignId,\n          minimumContribution,\n          address(this).balance,\n          requests.length,\n          approversCount,\n          manager\n        );\n    }\n\n    function getRequestsCount() public view returns (uint) {\n        return requests.length;\n    }\n}\n",
-  "sourcePath": "/Volumes/Storage/blockchain-projects/contract-crowdfunding/truffle/contracts/Campaign.sol",
+  "sourcePath": "/Users/eric/blockchain-projects/crowdfunding-react-demo/truffle/contracts/Campaign.sol",
   "ast": {
     "absolutePath": "project:/contracts/Campaign.sol",
     "exportedSymbols": {
@@ -7199,8 +7199,8 @@
     "5": {
       "events": {},
       "links": {},
-      "address": "0x457eB2535A81B6E587EbeBdf3CBBa94fFFf9dD98",
-      "transactionHash": "0xb65f7390d9922889aa9a7c3eb76d4b181be59aaa18aa8f9b2c4825bd462d276b"
+      "address": "0x80fFea295216d6049091a6FAD5EC9a3428094793",
+      "transactionHash": "0x2fcfeb2d9dddd86bfcc9cc6c26c65fcdf62e71e28c6e1b5b22b49a802877baf7"
     },
     "5777": {
       "events": {},
@@ -7222,7 +7222,7 @@
     }
   },
   "schemaVersion": "3.4.10",
-  "updatedAt": "2022-11-02T03:44:15.713Z",
+  "updatedAt": "2022-11-04T02:42:04.317Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
