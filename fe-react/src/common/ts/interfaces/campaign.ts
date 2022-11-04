@@ -13,4 +13,5 @@ export interface ISmartContract extends ICampaign{
   numberOfRequest?: string
   numberOfApprovers?: string
   address?: string
+  balance?: string
 }

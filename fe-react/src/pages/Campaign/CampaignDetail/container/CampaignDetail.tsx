@@ -97,7 +97,7 @@ const CampaignDetail = () => {
           <div style={{ textAlign: 'start' }}>
             <p>{detailData?.title}</p>
             <small className={styles.title}>{address}</small>
-            <p>Total:</p>
+            <p>Total: {detailData?.balance}</p>
             {detailData && (<div>
               <ul>
                 <li>
