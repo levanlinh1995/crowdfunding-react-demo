@@ -117,6 +117,12 @@ const CampaignDetail = () => {
 
           </div>
           <Button onClick={hdViewRequest}>View request</Button>
+          
+        </div>
+      </div>
+      <div className={styles.description}>
+        <div className={styles.desLeft}>{detailData?.description}</div>
+        <div>
           <Form
             form={form}
             layout="inline"

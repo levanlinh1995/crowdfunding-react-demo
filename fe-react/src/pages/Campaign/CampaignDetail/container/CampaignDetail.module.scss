@@ -54,3 +54,16 @@
   font-weight: var(--font-bold);
   overflow-wrap: break-word;
 }
+
+.description {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  justify-content: space-around;
+}
+
+.desLeft {
+  width: 60%;
+  text-align: justify;
+}
