@@ -3,7 +3,7 @@ export interface ICampaign {
   title?: string
   description?: string
   shortDescription?: string
-  status?: number
+  status?: number|string
   imageUrl?: string
 }
 
@@ -12,4 +12,5 @@ export interface ISmartContract extends ICampaign{
   managerAddress?: string
   numberOfRequest?: string
   numberOfApprovers?: string
+  address?: string
 }

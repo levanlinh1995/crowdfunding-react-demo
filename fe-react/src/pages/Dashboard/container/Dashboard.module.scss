@@ -70,5 +70,12 @@
       font-weight: var(--font-bold);
       overflow-wrap: break-word;
     }
+
+    .ant-card-campaign-info {
+      word-wrap: break-word;
+    }
+    .ant-text-small {
+      font-size: 13px;
+    }
   }
 }

@@ -17,37 +17,28 @@ const Dashboard = () => {
   useEffect(() => {
     try {
       const fetchApi = async () => {
-        const newArray: ISmartContract[] = []
         const campaigns = await factory.methods.getDeployedCampaigns().call()
+
+        console.log('campaigns::', campaigns)
         
-        campaigns.forEach(async (element) => {
+        const newCampaigns = await Promise.all(campaigns.map(async (element) => {
           const campaign = Campaign(element);
           const summary = await campaign.methods.getSummary().call();
           const campaignId = summary[0]
           const response = await campaignApi.getCampaignById(campaignId)
           
-          // const newCampaign = {
-          //   ...response.data,
-          //   minimumAmount: summary[1],
-          //   balance: summary[2],
-          //   numberOfRequest: summary[3],
-          //   numberOfApprovers: summary[4],
-          //   managerAddress: summary[5]
-          // }
-
-          const newCampaign = {
+          return {
+            ...response.data,
             minimumAmount: summary[1],
             balance: summary[2],
             numberOfRequest: summary[3],
             numberOfApprovers: summary[4],
-            managerAddress: summary[5]
+            managerAddress: summary[5],
+            address: element
           }
+        }))
 
-          //console.log('newCampaign::', newCampaign)
-
-        });
-        console.log('newArray::', newArray)
-        setCampaignList(newArray)
+        setCampaignList(newCampaigns)
         
 
       }
@@ -66,7 +57,7 @@ const Dashboard = () => {
     navigate(`${CAMPAIGN}/new`)
   }
 
-  console.log('campaignList::', campaignList?.length)
+  console.log('campaignList::', campaignList)
   return (
     <div className={styles.wrapper}>
       <Button onClick={hdCreateNew} className={styles.createNewBtn} icon={<PlusOutlined />}>
@@ -87,9 +78,19 @@ const Dashboard = () => {
                   src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
                 />
               }
-              onClick={() => hdViewMore(campaign?.managerAddress || '')}
+              onClick={() => hdViewMore(campaign?.address || '')}
             >
-              <Card.Meta title='Campaign' description={`${campaign?.managerAddress}`} />
+              <Card.Meta title={`${campaign?.title || ''}`} description={`${campaign?.address}`} />
+              <div className='ant-card-meta-detail ant-card-campaign-info'>
+                <div className='campaign-row'>
+                  <p className='ant-text-small'>minimum amount: {campaign?.minimumAmount}</p>
+                  <p className='ant-text-small'>number of request: {campaign?.numberOfApprovers}</p>
+                </div>
+                <div className='campaign-row'>
+                  <p className='ant-text-small'>number of approvers: {campaign?.numberOfApprovers}</p>
+                  <p className='ant-text-small'>manager address: {campaign?.managerAddress}</p>
+                </div>
+              </div>
             </Card>
           )
         })}
