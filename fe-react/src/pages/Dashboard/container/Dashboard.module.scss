@@ -54,7 +54,7 @@
     }
     .ant-card-meta-title {
       background-color: var(--cl-blue-5);
-      max-width: 100px;
+      max-width: 100%;
       border-radius: 8px;
 
       display: flex;
@@ -64,6 +64,7 @@
       font-size: var(--font-size-xxs);
       font-weight: var(--font-bold);
       line-height: 1.5;
+      padding: 9px;
     }
     .ant-card-meta-description {
       padding-top: 20px;

@@ -98,6 +98,8 @@ const CampaignRequest = () => {
 
   const { dataTable } = useDataRequest(campaign)
 
+  console.log('dataTable::', dataTable)
+
   const columns: ColumnsType<IDataTable> = useMemo(
     () => [
       {

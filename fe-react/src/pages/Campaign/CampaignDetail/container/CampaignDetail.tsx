@@ -120,6 +120,7 @@ const CampaignDetail = () => {
           
         </div>
       </div>
+      <hr className={styles.line} />
       <div className={styles.description}>
         <div className={styles.desLeft}>{detailData?.description}</div>
         <div>
