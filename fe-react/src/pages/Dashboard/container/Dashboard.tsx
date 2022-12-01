@@ -61,7 +61,7 @@ const Dashboard = () => {
   return (
     <div className={styles.wrapper}>
       <Button onClick={hdCreateNew} className={styles.createNewBtn} icon={<PlusOutlined />}>
-        Create new
+        Create new campaign
       </Button>
       <div className={styles.listCampaign}>
         {campaignList && campaignList?.map((campaign) => {
