@@ -20,13 +20,13 @@ const Dashboard = () => {
         const campaigns = await factory.methods.getDeployedCampaigns().call()
 
         console.log('campaigns::', campaigns)
-        
+
         const newCampaigns = await Promise.all(campaigns.map(async (element) => {
           const campaign = Campaign(element);
           const summary = await campaign.methods.getSummary().call();
           const campaignId = summary[0]
           const response = await campaignApi.getCampaignById(campaignId)
-          
+
           return {
             ...response.data,
             minimumAmount: summary[1],
@@ -39,7 +39,7 @@ const Dashboard = () => {
         }))
 
         setCampaignList(newCampaigns)
-        
+
 
       }
       fetchApi()
@@ -84,7 +84,7 @@ const Dashboard = () => {
               <div className='ant-card-meta-detail ant-card-campaign-info'>
                 <div className='campaign-row'>
                   <p className='ant-text-small'>minimum amount: {campaign?.minimumAmount}</p>
-                  <p className='ant-text-small'>number of request: {campaign?.numberOfApprovers}</p>
+                  <p className='ant-text-small'>number of request: {campaign?.numberOfRequest}</p>
                 </div>
                 <div className='campaign-row'>
                   <p className='ant-text-small'>number of approvers: {campaign?.numberOfApprovers}</p>
