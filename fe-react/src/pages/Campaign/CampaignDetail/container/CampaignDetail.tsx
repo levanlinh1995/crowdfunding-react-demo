@@ -110,14 +110,14 @@ const CampaignDetail = () => {
                   <span>number of request:</span> {detailData?.numberOfRequest}
                 </li>
                 <li>
-                  <span>number of approvers:</span> {detailData?.numberOfApprovers}
+                  <span>number of contributor:</span> {detailData?.numberOfApprovers}
                 </li>
               </ul>
             </div>)}
 
           </div>
           <Button onClick={hdViewRequest}>View request</Button>
-          
+
         </div>
       </div>
       <hr className={styles.line} />

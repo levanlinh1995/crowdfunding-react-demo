@@ -87,7 +87,7 @@ const Dashboard = () => {
                   <p className='ant-text-small'>number of request: {campaign?.numberOfRequest}</p>
                 </div>
                 <div className='campaign-row'>
-                  <p className='ant-text-small'>number of approvers: {campaign?.numberOfApprovers}</p>
+                  <p className='ant-text-small'>number of contributor: {campaign?.numberOfApprovers}</p>
                   <p className='ant-text-small'>manager address: {campaign?.managerAddress}</p>
                 </div>
               </div>
